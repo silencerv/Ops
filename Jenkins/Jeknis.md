@@ -1,13 +1,12 @@
-#Jenkins搭建全记录
+# Jenkins搭建全记录
 ===
-##安装Jenkins
+## 安装Jenkins
 安装请参见文档:
  <a href="https://jenkins.io/doc/pipeline/tour/getting-started/">jenkins.io</a>
+## 服务配置
+我们期望的是将jenkins作为一个服务，可以开机自动启动，支持start、stop、restart、status命令。
  
- ##服务配置
- 我们期望的是将jenkins作为一个服务，可以开机自动启动，支持start、stop、restart、status命令。
- 
-###启动脚本
+### 启动脚本
 参见注释配置基本的环境变量  
 并将启动脚本放置在JENKINS_HOME/start-jenkins.sh
 chmod a+x start-jenkins.sh
@@ -74,14 +73,14 @@ else
     nohup nice $JENKINS_JAVA $JENKINS_JAVAOPTS -jar $JENKINS_WAR --httpListenAddress=$JENKINS_IP --httpPort=$JENKINS_PORT $> $JENKINS_LOG 2>&1 &
 fi
 ```
-###停止脚本
+### 停止脚本
 将启动脚本放置在JENKINS_HOME/stop-jenkins.sh
 chmod a+x stop-jenkins.sh
 ```bash
 #!/bin/bash
 kill `ps -ef | grep jenkins.war | grep -v grep | awk '{print $2}'`
 ```
-###服务脚本
+### 服务脚本
 vi /etc/init.d/jenkins
 chomod a+x jenkins
 ```bash
@@ -173,7 +172,7 @@ esac
 
 exit 0
 ```
-###大功告成
+### 大功告成
 然后我们可以通过以下几个命令起停、查看jenkins状态，以及开启服务
 ```bash
 service jenkins status
@@ -195,18 +194,19 @@ JENKINS_PORT=8080
 JENKINS_ARGS=""
 ```
 
-#初始化Jenkins
+# 初始化Jenkins
 假设我们配置的端口为8080
 接下来我们访问Jenkins服务
 
 1.解锁Jenkins  
 按照提示的路径将密码粘贴到输入框
-//、
-  
+![image](https://github.com/silencerv/Ops/blob/master/Jenkins/pics/unlock_jenkins.jpg)
 2.插件安装  
 如图，根据需要选择安装类型，这里我们选择安装推荐的插件  
 插件随时可以安装，以后有需要在自行安装
-
+![image](https://github.com/silencerv/Ops/blob/master/Jenkins/pics/jenkins_plugin_choose.jpg)
 接下来等待jenkins安装插件
-  
+![image](https://github.com/silencerv/Ops/blob/master/Jenkins/pics/step_up.png)
+3.设置管理员帐户
+4.配置JenkinsURL
    
