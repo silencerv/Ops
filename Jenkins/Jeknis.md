@@ -1,5 +1,4 @@
 # Jenkins搭建全记录
-===
 ## 安装Jenkins
 安装请参见文档:
  <a href="https://jenkins.io/doc/pipeline/tour/getting-started/">jenkins.io</a>
@@ -208,5 +207,6 @@ JENKINS_ARGS=""
 接下来等待jenkins安装插件
 ![image](https://github.com/silencerv/Ops/blob/master/Jenkins/pics/step_up.png)
 3.设置管理员帐户
+
 4.配置JenkinsURL
    
