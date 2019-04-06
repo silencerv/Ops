@@ -214,4 +214,5 @@ PS:如果登入jenkins为空白页,尝试重启jenkins服务即可
 ## 安装插件
 ### 安装Maven Plugin
 1.首先需要安装Maven,<a href="https://maven.apache.org/download.cgi">Download Maven</a>  
-2.进入系统管理-全局工具配置-Maven-新增Maven-填写配置-Save
+2.进入系统管理-全局工具配置-Maven-新增Maven-填写配置-Save  
+3.系统管理-管理插件-选择可选插件tab-搜索Maven Integration-直接安装
