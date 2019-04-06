@@ -208,5 +208,5 @@ JENKINS_ARGS=""
 ![image](https://github.com/silencerv/Ops/blob/master/Jenkins/pics/step_up.png)
 3.设置管理员帐户
 
-4.配置JenkinsURL
-   
+4.配置JenkinsURL  
+PS:如果登入jenkins为空白页,尝试重启jenkins服务即可
