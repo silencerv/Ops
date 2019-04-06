@@ -193,7 +193,7 @@ JENKINS_PORT=8080
 JENKINS_ARGS=""
 ```
 
-# 初始化Jenkins
+## 初始化Jenkins
 假设我们配置的端口为8080
 接下来我们访问Jenkins服务
 
@@ -210,3 +210,8 @@ JENKINS_ARGS=""
 
 4.配置JenkinsURL  
 PS:如果登入jenkins为空白页,尝试重启jenkins服务即可
+
+## 安装插件
+### 安装Maven Plugin
+1.首先需要安装Maven,<a href="https://maven.apache.org/download.cgi">Download Maven</a>  
+2.进入系统管理-全局工具配置-Maven-新增Maven-填写配置-Save
