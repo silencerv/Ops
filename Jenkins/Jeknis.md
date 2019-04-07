@@ -216,3 +216,70 @@ PS:如果登入jenkins为空白页,尝试重启jenkins服务即可
 1.首先需要安装Maven,<a href="https://maven.apache.org/download.cgi">Download Maven</a>  
 2.进入系统管理-全局工具配置-Maven-新增Maven-填写配置-Save  
 3.系统管理-管理插件-选择可选插件tab-搜索Maven Integration-直接安装
+
+## 创建任务
+1. 点击左上角的新建任务
+2. git等配置忽略，自行解决
+3. 期望在执行构建前检查代码是否已经合并master，在Pre Steps执行以下脚本
+```bash
+#!/bin/bash
+if [ ${branch} == "master" ]
+then
+  echo "this is master not need merge"
+else
+  result=`git branch -r --contains origin/master | grep "/${branch}\$" | wc -l`
+  echo $result
+  if [ $result == 0 ]
+  then
+  	echo "not merged master"
+  	echo "代码尚未合并master,请手动进行合并！！！！！！！！！！！！！！！！！！！！！！！"
+  exit 1
+  else
+  	echo "merged master"
+  fi
+fi
+```
+4. 配置Maven执行参数以及pom.xml文件位置
+5. 在PostSteps执行部署脚本，变量请按需修改
+```bash
+#!/bin/bash
+BUILD_ID=DONTKILLME
+DEPLOY_HOME=/home/app/spring-boot-demo
+JAR_NAME=SpringBoot
+MAVEN_TARGET=target
+JAVA=/home/jdk/jdk1.8.0_201/bin/java
+mkdir -p ${DEPLOY_HOME}/logs
+
+JVM_OPT="-Xmx256m -Xms256m -XX:MaxMetaspaceSize=256m -XX:+UseG1GC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:${DEPLOY_HOME}/logs/gc.log -Dserver.port=7788 -Xrunjdwp:server=y,transport=dt_socket,address=9088,suspend=n"
+
+
+function init() {
+	PID_NUM=$(ps aux |grep "${JAR_NAME}.jar"|grep -v "grep"|awk '{print $2}')
+	echo ${PID_NUM}
+	if [ ${PID_NUM} ] ; then
+		echo kill ${JAR_NAME}.jar
+		kill ${PID_NUM}
+		echo sleep 10
+		sleep 10
+		PID_NUM=$(ps aux |grep "${JAR_NAME}.jar"|grep -v "grep"|awk '{print $2}')
+		if [ ${PID_NUM} ] ; then
+			echo kill -9 ${JAR_NAME}.jar
+			kill -9 ${PID_NUM}
+		fi
+	else
+		echo ${JAR_NAME}.jar not running
+	fi
+}
+
+
+
+function run() {
+	rm -f ${DEPLOY_HOME}/${JAR_NAME}.jar
+	cp ${WORKSPACE}/${MAVEN_TARGET}/${JAR_NAME}-1.0-SNAPSHOT.jar ${DEPLOY_HOME}/${JAR_NAME}.jar
+    nohup $JAVA ${JVM_OPT} -jar ${DEPLOY_HOME}/${JAR_NAME}.jar > ${DEPLOY_HOME}/logs/spring.out 2>&1 &
+	echo run finished
+}
+init
+run
+```
+6. 保存，执行脚本即可
