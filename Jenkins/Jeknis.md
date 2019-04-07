@@ -197,25 +197,25 @@ JENKINS_ARGS=""
 假设我们配置的端口为8080
 接下来我们访问Jenkins服务
 
-1.解锁Jenkins  
+1. 解锁Jenkins  
 按照提示的路径将密码粘贴到输入框
 ![image](https://github.com/silencerv/Ops/blob/master/Jenkins/pics/unlock_jenkins.jpg)
-2.插件安装  
+2. 插件安装  
 如图，根据需要选择安装类型，这里我们选择安装推荐的插件  
 插件随时可以安装，以后有需要在自行安装
 ![image](https://github.com/silencerv/Ops/blob/master/Jenkins/pics/jenkins_plugin_choose.jpg)
 接下来等待jenkins安装插件
 ![image](https://github.com/silencerv/Ops/blob/master/Jenkins/pics/step_up.png)
-3.设置管理员帐户
+3. 设置管理员帐户
 
-4.配置JenkinsURL  
+4. 配置JenkinsURL  
 PS:如果登入jenkins为空白页,尝试重启jenkins服务即可
 
 ## 安装插件
 ### 安装Maven Plugin
-1.首先需要安装Maven,<a href="https://maven.apache.org/download.cgi">Download Maven</a>  
-2.进入系统管理-全局工具配置-Maven-新增Maven-填写配置-Save  
-3.系统管理-管理插件-选择可选插件tab-搜索Maven Integration-直接安装
+1. 首先需要安装Maven,<a href="https://maven.apache.org/download.cgi">Download Maven</a>  
+2. 进入系统管理-全局工具配置-Maven-新增Maven-填写配置-Save  
+3. 系统管理-管理插件-选择可选插件tab-搜索Maven Integration-直接安装
 
 ## 创建任务
 1. 点击左上角的新建任务
